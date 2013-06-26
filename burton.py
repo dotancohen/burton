@@ -1,16 +1,15 @@
 #!/usr/bin/python3
+import os
 import platform
 import sys
+import time
 
 import system_statistics
 import configure_websites
 
 
+
 burton_version = '0.1'
-
-
-def test_func():
-	print("test_func() called!")
 
 
 
@@ -41,6 +40,11 @@ def main(argv):
 
 
 
-
 if __name__ == '__main__':
 	main(sys.argv)
+	""" Reenable after development is done!
+	if os.getuid()==0:
+		main(sys.argv)
+	else:
+		print("Please run as root.")
+	"""
