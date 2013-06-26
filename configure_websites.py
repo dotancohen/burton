@@ -1,3 +1,7 @@
+# Enable / disable .htaccess for a site
+# PHP configuration
+
+
 def select_configure_websites():
 	while True:
 		print("\nConfigure Websites\n")

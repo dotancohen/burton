@@ -1,3 +1,6 @@
+# Uptime
+# option to enable cron job to write specific sys stats to a logfile
+
 def select_system_statistics():
 	print("\nSystem Statistics\n")
 
