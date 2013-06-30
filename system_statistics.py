@@ -1,7 +1,18 @@
+import sys
+
 # Uptime
 # option to enable cron job to write specific sys stats to a logfile
 
-def select_system_statistics():
+
+
+environment = ''
+
+
+
+def select_system_statistics(env):
+	global environment
+	environment = env
+
 	print("\nSystem Statistics\n")
 
 	print("Quick Stats:")
@@ -15,11 +26,14 @@ def select_system_statistics():
 		print(" 1. Detailed Foo")
 		print(" 2. Detailed Bar")
 		print(" 0. Go Back")
+		print(" -. Exit")
 
-		operation = input(">> ")
+		operation = input(environment.prompt)
 
 		if operation == '0':
 			return True
+		elif operation == '-':
+			sys.exit()
 		elif operation == '1':
 			detailed_foo()
 		elif operation == '2':
