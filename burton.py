@@ -41,10 +41,8 @@ def main(argv):
 
 
 if __name__ == '__main__':
+	if not os.getuid()==0:
+		print("\nBurton may not run properly when not run as root.")
+		print("Please exit and restart as root user or with sudo.")
+
 	main(sys.argv)
-	""" Reenable after development is done!
-	if os.getuid()==0:
-		main(sys.argv)
-	else:
-		print("Please run as root.")
-	"""
