@@ -10,7 +10,7 @@ environment = ''
 
 
 
-def select_configure_websites(env):
+def main(env):
 	global environment
 	environment = env
 

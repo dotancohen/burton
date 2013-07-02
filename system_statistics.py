@@ -9,7 +9,7 @@ environment = ''
 
 
 
-def select_system_statistics(env):
+def main(env):
 	global environment
 	environment = env
 

@@ -49,11 +49,11 @@ def main(argv):
 		if operation == '-':
 			sys.exit()
 		elif operation == '1':
-			system_statistics.select_system_statistics(env)
+			system_statistics.main(env)
 		elif operation == '2':
-			configure_websites.select_configure_websites(env)
+			configure_websites.main(env)
 		elif operation == '3':
-			configure_email.select_configure_email(env)
+			configure_email.main(env)
 		else:
 			print("Invalid input!")
 

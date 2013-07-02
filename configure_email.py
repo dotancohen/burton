@@ -7,7 +7,7 @@ environment = ''
 
 
 
-def select_configure_email(env):
+def main(env):
 	global environment
 	environment = env
 
