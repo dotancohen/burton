@@ -7,6 +7,7 @@ import time
 import system_statistics
 import configure_websites
 import configure_email
+import install_applications
 
 
 
@@ -40,6 +41,7 @@ def main(argv):
 		print(" 1. System statistics")
 		print(" 2. Configure websites")
 		print(" 3. Configure email")
+		print(" 4. Install applications")
 		# print(" 3. Configure databases")
 		# print(" 4. Configure email")
 		print(" -. Exit")
@@ -54,6 +56,8 @@ def main(argv):
 			configure_websites.main(env)
 		elif operation == '3':
 			configure_email.main(env)
+		elif operation == '4':
+			install_applications.main(env)
 		else:
 			print("Invalid input!")
 
