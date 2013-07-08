@@ -36,3 +36,21 @@ Who finances Burton development?
 --------------------------------
 
 My employer! Burton started as a project to help myself and other admins manage our own servers without a web-based control panel. I generally add features as we need them in-house.
+
+With which software is Burton compatible?
+-----------------------------------------
+
+New software support is easy to add to Burton. For the 1.0 release, I am aiming to support the software that I use at work: Ubuntu Server, Apache2, Postfix, Dovecot2, and Python3.
+
+Will Burton work with my existing system setup?
+-----------------------------------------------
+
+1. For websites: If you are using Apache2 with the typical Ubuntu Server sites-available configuration, then yes.
+2. For email, if you are using Postfix with Dovecot2, Maildir and passwd-file, then yes.
+
+
+TODO
+====
+
+1. Check installed versions of software: apache2, dovecot2, postfix
+

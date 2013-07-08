@@ -42,4 +42,9 @@ def manage_email_accounts():
 
 def manage_email_forwarders():
 	print("Manage email forwarders")
+
+	
+	# Add a forwarder from a single address to multiple addresses
+	# In Plesk this is called a Mail Group
+
 	return True
