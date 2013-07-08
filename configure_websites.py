@@ -47,3 +47,4 @@ def restart_apache():
 
 def add_website():
 	print("Add website!")
+	return True

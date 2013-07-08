@@ -45,8 +45,10 @@ def main(env):
 
 def detailed_foo():
 	print("Foo!")
+	return True
 
 
 
 def detailed_bar():
 	print("Bar!")
+	return True
