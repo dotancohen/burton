@@ -59,9 +59,9 @@ License
 
 After consulting with the following license wizards:...
 
-*. http://www.openfoundry.org/LicenseWizard2EN/LicenseWizard.cgi
-*. http://home.ccil.org/~cowan/floss/
-*. http://www.oss-watch.ac.uk/apps/licdiff/
+* http://www.openfoundry.org/LicenseWizard2EN/LicenseWizard.cgi
+* http://home.ccil.org/~cowan/floss/
+* http://www.oss-watch.ac.uk/apps/licdiff/
 
 ...I have decided to license Burton under the GNU General Public License v2.0.
 
