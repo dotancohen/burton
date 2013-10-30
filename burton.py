@@ -26,7 +26,7 @@ import configure_system
 import configure_websites
 import configure_email
 import install_applications
-
+import auxiliary_pages
 
 
 burton_version = '0.1'
