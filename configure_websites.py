@@ -19,6 +19,7 @@ def main(env):
 		print("Please select an operation:")
 		print(" 1. Restart Apache")
 		print(" 2. Add a new website")
+		print(" 3. Add SSL to website")
 		print(" 0. Go Back")
 		print(" -. Exit")
 
@@ -32,6 +33,8 @@ def main(env):
 			restart_apache()
 		elif operation == '2':
 			add_website()
+		elif operation == '3':
+			add_ssl()
 		else:
 			print("Invalid input.")
 
@@ -47,4 +50,10 @@ def restart_apache():
 
 def add_website():
 	print("Add website!")
+	return True
+
+
+
+def add_ssl():
+	print("Add SSL to website!")
 	return True
