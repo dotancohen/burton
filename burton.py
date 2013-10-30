@@ -22,6 +22,7 @@ import sys
 import time
 
 import system_statistics
+import configure_system
 import configure_websites
 import configure_email
 import install_applications
@@ -55,12 +56,13 @@ def main(argv):
 	while True:
 
 		print("\nPlease select an operation:")
-		print(" 1. System statistics")
-		print(" 2. Configure websites")
-		print(" 3. Configure email")
-		print(" 4. Install applications")
-		# print(" 3. Configure databases")
-		# print(" 4. Configure email")
+		print(" 1. Operating system statistics")
+		print(" 2. Configure and maintain operating system")
+		print(" 3. Configure websites")
+		print(" 4. Configure email")
+		print(" 5. Install applications")
+		# print(" 5. Configure databases")
+		print(" 9. View Help, About, License, and Copyright pages")
 		print(" -. Exit")
 
 		operation = input(env.prompt)
@@ -70,11 +72,15 @@ def main(argv):
 		elif operation == '1':
 			system_statistics.main(env)
 		elif operation == '2':
-			configure_websites.main(env)
+			configure_system.main(env)
 		elif operation == '3':
-			configure_email.main(env)
+			configure_websites.main(env)
 		elif operation == '4':
+			configure_email.main(env)
+		elif operation == '5':
 			install_applications.main(env)
+		elif operation == '9':
+			auxiliary_pages.main(env)
 		else:
 			print("Invalid input!")
 
