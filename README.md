@@ -32,27 +32,22 @@ How can Burton be so secure, yet Plesk is so insecure?
 
 Plesk and other web-based control panels suffer a fundamental flaw: they expose privileged configuration options to an unprivileged environment (the World Wide Web), then tack on their own 'privilege management' in the form of user accounts with passwords. Even when properly coded, Plesk will still suffer all the standard security issues inherent in web applications, such as Cross-Site Scripting, PHP and Apache vulnerabilities, browser vulnerabilities, etc. ad nauseum. Additionally, vulnerabilities in Plesk itself are well known and discovered on a regular basis. Burton is not exposed to an unprivileged environment, and thus does not present any new attack vectors.
 
-Who finances Burton development?
---------------------------------
-
-My employer! Burton started as a project to help myself and other admins manage our own servers without a web-based control panel. I generally add features as we need them in-house.
-
 With which software is Burton compatible?
 -----------------------------------------
 
-New software support is easy to add to Burton. For the 1.0 release, I am aiming to support the software that I use at work: Ubuntu Server, Apache2, Postfix, Dovecot2, and Python3.
+New software support is easy to add to Burton. For the 1.0 release, I am aiming to support the software that I use at work: Ubuntu Server, Apache2, Postfix, and Python3.
 
 Will Burton work with my existing system setup?
 -----------------------------------------------
 
 1. For websites: If you are using Apache2 with the typical Ubuntu Server sites-available configuration, then yes.
-2. For email, if you are using Postfix with Dovecot2, Maildir and passwd-file, then yes.
+2. For email: If you haven't set anything up yet, then yes.
 
 
 TODO
 ====
 
-1. Check installed versions of software: apache2, dovecot2, postfix
+1. Check installed versions of software: apache2, python, postfix
 
 License
 =======
