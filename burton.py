@@ -66,6 +66,7 @@ def main(argv):
 		print(" -. Exit")
 
 		operation = input(env.prompt)
+		operation = operation.lower().strip()
 
 		if operation == '-':
 			sys.exit()
