@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 
 # Enable / disable .htaccess for a site
@@ -42,14 +43,49 @@ def main(env):
 
 def restart_apache():
 	print("\nAttempting to restart Apache:")
+
+	# TODO: Print an error when the user does not have permissions to perform the action.
 	result = os.system("service apache2 restart")
+
 	print(result)
 	return True
 
 
 
 def add_website():
-	print("Add website!")
+
+	global environment
+
+	print("\nAdd website.\n")
+	input_file = open('./example-files/apache-site', 'r')
+	input_file_text = input_file.read()
+	input_file.close()
+
+	site_name = input("Website name (without www or http)" + environment.prompt)
+	new_filename = '/etc/apache2/sites-available/' + site_name + '.conf'
+	# TODO: Check that site_name is legal for both a domain name and a filename.
+
+	while os.path.isfile(new_filename):
+		print("Site exists! Please choose another.")
+		site_name = input("Website name (without www or http)" + environment.prompt)
+		new_filename = '/etc/apache2/sites-available/' + site_name + '.conf'
+
+	new_config = re.sub('SITE', site_name, input_file_text)
+	try:
+		output_file = open(new_filename, 'w')
+		output_file.write(new_config)
+		output_file.close()
+	except PermissionError as e:
+		print('\n\nError!')
+		print('The current user does not have permission to perform this action.')
+		print('Please run Burton with elevated permissions to resolve this error.\n\n')
+
+	# TODO: Print an error when the user does not have permissions to perform the action.
+	result = os.system("mkdir -p /var/www/" + site_name + '/public_html/')
+	result = os.system("a2ensite " + site_name + '.conf')
+
+	restart_apache()
+
 	return True
 
 
