@@ -2,8 +2,24 @@ import os
 import re
 import sys
 
-# Enable / disable .htaccess for a site
-# PHP configuration
+"""
+* Perform initial configuration to ensure that the server is set up to work with Burton's format
+    sudo chown -R ubuntu:ubuntu /var/www
+    mkdir -p /var/www/default/public_html
+    mv /var/www/html/index.html /var/www/default/public_html # Ubuntu >=14.04
+    mv /var/www/index.html /var/www/default/public_html # Ubuntu <14.04
+    rm -rf /var/www/html
+    sudo vim /etc/apache2/sites-available/000-default.conf # Ubuntu >=14.04
+    sudo vim /etc/apache2/sites-available/default # Ubuntu <14.04
+    sudo a2enmod ssl
+    sudo service apache2 restart
+
+
+* Enable / disable .htaccess for a site
+
+* PHP configuration
+
+"""
 
 
 
