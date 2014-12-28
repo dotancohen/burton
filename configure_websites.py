@@ -107,5 +107,29 @@ def add_website():
 
 
 def add_ssl():
-	print("Add SSL to website!")
+
+	global environment
+
+	print("\nAdd SSL to website.\n")
+	print("Please enter the URL of the website.\n")
+	site_name = input(environment.prompt)
+	print("Is this a wildcard certificate? (y/N)\n")
+	wildcard = input(environment.prompt)
+
+	if wildcard.lower()=='y':
+		print("Generating wildcard cert for *.%s" % (site_name,))
+		wildcard = '*.'
+	else:
+		print("Generating cert for %s" % (site_name,))
+		wildcard = ''
+
+
+	# http://serverfault.com/questions/649990/non-interactive-creation-of-ssl-certificate-requests
+	#command_template = 'openssl req -new -newkey rsa:2048 -nodes -sha256 -keyout foobar.com.key -out foobar.com.csr -subj "/C=US/ST=New foobar/L=foobar/O=foobar foobar, Inc./CN=foobar.com/emailAddress=foobar@foobar.com"'
+
+	command_template = "openssl req -new -newkey rsa:2048 -nodes -sha256 -keyout %s.key -out %s.csr -subj \"/CN=%s%s\""
+
+	print(command_template % (site_name, site_name, wildcard, site_name))
+
 	return True
+
