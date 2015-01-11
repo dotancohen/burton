@@ -47,7 +47,8 @@ Will Burton work with my existing system setup?
 TODO
 ====
 
-1. Check installed versions of software: apache2, python, postfix
+* Check installed versions of software: linux distro, apache2, python, postfix
+* Install and configure LAMP server.
 
 License
 =======
@@ -62,5 +63,5 @@ After consulting with the following license wizards:...
 
 If you would like to use Burton under a different software license you are encouraged to contact me and explain what you would like to do. I'm easy to get along with.
 
-Copyright 2013, Dotan Cohen
+Copyright 2013-2015, Dotan Cohen  
 http://dotancohen.com
