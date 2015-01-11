@@ -22,14 +22,18 @@ import sys
 import time
 
 import system_statistics
+
 import configure_system
 import configure_websites
 import configure_email
+import configure_databases
+
 import install_applications
 import auxiliary_pages
 
 
-burton_version = '0.1'
+
+burton_version = '0.1.1'
 
 
 
@@ -60,8 +64,8 @@ def main(argv):
 		print(" 2. Configure and maintain operating system")
 		print(" 3. Configure websites")
 		print(" 4. Configure email")
-		print(" 5. Install applications")
-		# print(" 5. Configure databases")
+		print(" 5. Configure databases")
+		print(" 6. Install applications")
 		print(" 9. View Help, About, License, and Copyright pages")
 		print(" -. Exit")
 
@@ -79,6 +83,8 @@ def main(argv):
 		elif operation == '4':
 			configure_email.main(env)
 		elif operation == '5':
+			configure_databases.main(env)
+		elif operation == '6':
 			install_applications.main(env)
 		elif operation == '9':
 			auxiliary_pages.main(env)
