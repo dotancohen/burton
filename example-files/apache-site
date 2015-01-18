@@ -16,8 +16,8 @@
 		allow from all
 	</Directory>
 
-	ErrorLog ${APACHE_LOG_DIR}/error_SITE.log
+	ErrorLog /var/www/SITE/logs/error.log combined
 	LogLevel warn
-	CustomLog ${APACHE_LOG_DIR}/access_SITE.log combined
+	CustomLog /var/www/SITE/logs/access.log combined
 
 </VirtualHost>

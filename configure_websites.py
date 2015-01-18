@@ -72,19 +72,19 @@ def add_website():
 
 	global environment
 
-	print("\nAdd website.\n")
+	print('\nAdd website.\n')
 	input_file = open('./example-files/apache-site', 'r')
 	input_file_text = input_file.read()
 	input_file.close()
 
-	site_name = input("Website name (without www or http)" + environment.prompt)
-	new_filename = '/etc/apache2/sites-available/' + site_name + '.conf'
+	site_name = input('Website name (without www or http)' + environment.prompt)
+	new_filename = '/etc/apache2/sites-available/%s.conf' % (site_name,)
 	# TODO: Check that site_name is legal for both a domain name and a filename.
 
 	while os.path.isfile(new_filename):
-		print("Site exists! Please choose another.")
-		site_name = input("Website name (without www or http)" + environment.prompt)
-		new_filename = '/etc/apache2/sites-available/' + site_name + '.conf'
+		print('Site exists! Please choose another.')
+		site_name = input('Website name (without www or http)' + environment.prompt)
+		new_filename = '/etc/apache2/sites-available/%s.conf' % (site_name,)
 
 	new_config = re.sub('SITE', site_name, input_file_text)
 	try:
@@ -97,8 +97,9 @@ def add_website():
 		print('Please run Burton with elevated permissions to resolve this error.\n\n')
 
 	# TODO: Print an error when the user does not have permissions to perform the action.
-	result = os.system("mkdir -p /var/www/" + site_name + '/public_html/')
-	result = os.system("a2ensite " + site_name + '.conf')
+	result = os.system('mkdir -p /var/www/%s/public_html/' % (site_name,))
+	result = os.system('mkdir -p /var/www/%s/logs/' % (site_name,))
+	result = os.system('a2ensite %s.conf' % (site_name,))
 
 	restart_apache()
 
