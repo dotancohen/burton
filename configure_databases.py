@@ -1,4 +1,5 @@
 import os
+import pymysql
 import sys
 
 
@@ -56,7 +57,7 @@ def manage_databases():
 			print(' %s. %s' % (str(index+1), value,))
 
 	new_db_index = index + 1
-	print(' %s. Add New Database' % (str(new_db_index+1),))
+	print(' %s. Create New Database' % (str(new_db_index+1),))
 	print(' 0. Go Back')
 	print(' -. Exit')
 
@@ -69,7 +70,7 @@ def manage_databases():
 		elif operation == '-':
 			sys.exit()
 		elif int(operation)-1 == new_db_index:
-			add_new_database()
+			create_new_database()
 		elif int(operation)-1 < new_db_index:
 			manage_database(available_databases[int(operation)-1])
 		else:
@@ -79,8 +80,14 @@ def manage_databases():
 
 
 
-def add_new_database():
-	print("\nAdd new database")
+def create_new_database():
+	print("\nCreate new database")
+
+	print("\nPlease enter a new database name:")
+	db_name = input(environment.prompt)
+
+	db = os.popen('sudo mysql --defaults-extra-file=/etc/mysql/debian.cnf --skip-column-names -e "CREATE DATABASE '+db_name+'"').read().split('\n')
+
 	return True
 
 
@@ -93,7 +100,30 @@ def manage_database(database):
 
 def manage_users():
 	print("\nManage users")
+
+	"""
+	mysql> SHOW GRANTS FOR someUser;
+	Due to a bug in MySQL, GRANT ALL does not permit GRANT FILE.
+	Due to a bug in MySQL, GRANT FILE only works with the db.table definition *.* (i.e. globally).
+	"""
 	return True
+
+
+
+def create_new_user():
+
+	print("\nCreate new database user")
+
+	"""
+	All privileges:
+	mysql> GRANT ALL PRIVILEGES ON someDB.* TO 'userName'@'localhost' IDENTIFIED BY 'passWord' WITH GRANT OPTION;
+
+	Limited:
+	mysql> GRANT SELECT, EXECUTE ON someDb.* TO 'userName'@'localhost' IDENTIFIED BY 'passWord';
+
+	mysql> FLUSH PRIVILEGES;
+	"""
+	return username
 
 
 
