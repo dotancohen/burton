@@ -4,10 +4,10 @@
 	ServerAlias www.SITE
 	DocumentRoot /var/www/SITE/public_html
 
-    <Directory />
-        Options FollowSymLinks
-        AllowOverride None
-    </Directory>
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
 
 	<Directory /var/www/SITE/public_html>
 		Options Indexes FollowSymLinks MultiViews
@@ -16,7 +16,7 @@
 		allow from all
 	</Directory>
 
-	ErrorLog /var/www/SITE/logs/error.log combined
+	ErrorLog /var/www/SITE/logs/error.log
 	LogLevel warn
 	CustomLog /var/www/SITE/logs/access.log combined
 
