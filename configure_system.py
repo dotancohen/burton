@@ -65,6 +65,20 @@ def run_aptitude():
 
 def add_git_repo():
 
-	print("\nAdding Git repo...")
+	print('\nAdd Git repo.\n')
+
+	# Hardcoded values
+	base_git_dir = '/var/git/'
+	git_login_name = 'gituser'
+
+
+	git_name = input('Git repo name' + environment.prompt)
+	# TODO: Validate input
+
+	git_dir = base_git_dir + git_name + '.git'
+
+	os.system("mkdir -p %s" % (git_dir, ))
+	os.system("cd %s ; git init --bare --shared" % (git_dir, ))
+	os.system("chgrp -R %s %s" % (git_login_name, git_dir, ))
 
 	return True
