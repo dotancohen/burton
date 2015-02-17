@@ -19,6 +19,7 @@ def main(env):
 		print("Please select an operation:")
 		print(" 1. Quick hands-free OS update")
 		print(" 2. Run Aptitude package manager")
+		print(" 3. Add Git public repository")
 		#print(" 3. Drop to shell")
 		print(" 0. Go Back")
 		print(" -. Exit")
@@ -33,6 +34,8 @@ def main(env):
 			quick_os_update()
 		elif operation == '2':
 			run_aptitude()
+		elif operation == '3':
+			add_git_repo()
 		else:
 			print("Invalid input.")
 
@@ -56,4 +59,12 @@ def quick_os_update():
 def run_aptitude():
 	print("\nRunning Aptitude...")
 	os.system("aptitude")
+	return True
+
+
+
+def add_git_repo():
+
+	print("\nAdding Git repo...")
+
 	return True
