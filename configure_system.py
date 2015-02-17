@@ -20,6 +20,7 @@ def main(env):
 		print(" 1. Quick hands-free OS update")
 		print(" 2. Run Aptitude package manager")
 		print(" 3. Add Git public repository")
+		print(" 4. Connect directory to remote Git repository")
 		#print(" 3. Drop to shell")
 		print(" 0. Go Back")
 		print(" -. Exit")
@@ -36,6 +37,8 @@ def main(env):
 			run_aptitude()
 		elif operation == '3':
 			add_git_repo()
+		elif operation == '4':
+			add_dir_to_git()
 		else:
 			print("Invalid input.")
 
@@ -80,5 +83,65 @@ def add_git_repo():
 	os.system("mkdir -p %s" % (git_dir, ))
 	os.system("cd %s ; git init --bare --shared" % (git_dir, ))
 	os.system("chgrp -R %s %s" % (git_login_name, git_dir, ))
+
+	git_dir_remote = 'ssh://%s%s' % (git_login_name, git_dir, )
+
+	print("The local path to the new Git repository is: %s" % (git_dir, ))
+	print("The remote path to the new Git repository is: %s" % (git_dir_remote, ))
+
+	return True
+
+
+
+def add_dir_to_git():
+
+	print('\nAdd Git repo.\n')
+
+	dir_name = input('Directory path to add' + environment.prompt)
+	git_name = input('Git repo path' + environment.prompt)
+	# TODO: Validate input
+
+	if not dir_name.endswith('/'):
+		dir_name += '/'
+
+	if not os.path.isdir(dir_name):
+		print('The specified directory does not seem to exist: %s' % (dir_name, ))
+		return False
+
+	external_command = "cd %s ; " % (dir_name, )
+	external_command+= " git status 2>&1 "
+
+	git_check = os.popen(external_command).read().strip()
+
+	if not 'Not a git repository' in git_check:
+		print('The specified directory is already in a Git repository: %s' % (dir_name, ))
+		return False
+
+	external_command = "cd %s ; " % (dir_name, )
+	external_command+= " git init ; "
+	external_command+= " git config user.name 'Do not work on the server' ; "
+	external_command+= " git config user.email 'do_not_work@on.the.server' ; "
+	external_command+= " git add . ; "
+	external_command+= " git commit -am 'Initial commit' 2>&1 "
+
+	create_repo = os.popen(external_command).read().strip()
+
+	#TODO: Check!
+
+	git_config_file = dir_name + '.git/config'
+	git_config = open(git_config_file, 'a')
+
+	git_append = """
+[remote "origin"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+        url = %s
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+""" % (git_name, )
+
+	git_config.write(git_append)
+
+	print('Done! You may need to run the following command to push to the repo:\n    git push origin master')
 
 	return True
