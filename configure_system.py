@@ -21,6 +21,8 @@ def main(env):
 		print(" 2. Run Aptitude package manager")
 		print(" 3. Add Git public repository")
 		print(" 4. Connect directory to remote Git repository")
+		print(" 5. Add public RSA key to allow remote logins")
+		print(" 6. Add private RSA key to login to remote server")
 		#print(" 3. Drop to shell")
 		print(" 0. Go Back")
 		print(" -. Exit")
@@ -39,6 +41,10 @@ def main(env):
 			add_git_repo()
 		elif operation == '4':
 			add_dir_to_git()
+		elif operation == '5':
+			add_public_rsa_key()
+		elif operation == '6':
+			add_private_rsa_key()
 		else:
 			print("Invalid input.")
 
@@ -143,5 +149,21 @@ def add_dir_to_git():
 	git_config.write(git_append)
 
 	print('Done! You may need to run the following command to push to the repo:\n    git push origin master')
+
+	return True
+
+
+
+def add_public_rsa_key():
+
+	print('\nAdd public RSA key.\n')
+
+	return True
+
+
+
+def add_private_rsa_key():
+
+	print('\nAdd private RSA key.\n')
 
 	return True
