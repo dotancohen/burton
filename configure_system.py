@@ -23,6 +23,7 @@ def main(env):
 		print(" 4. Connect directory to remote Git repository")
 		print(" 5. Add public RSA key to allow remote logins")
 		print(" 6. Add private RSA key to login to remote server")
+		print(" 7. Create RSA keys")
 		#print(" 3. Drop to shell")
 		print(" 0. Go Back")
 		print(" -. Exit")
@@ -45,6 +46,8 @@ def main(env):
 			add_public_rsa_key()
 		elif operation == '6':
 			add_private_rsa_key()
+		elif operation == '7':
+			create_rsa_keys()
 		else:
 			print("Invalid input.")
 
@@ -156,7 +159,7 @@ def add_dir_to_git():
 
 def add_public_rsa_key():
 
-	print('\nAdd public RSA key.\n')
+	print('\nAdd public RSA key to allow remote logins.\n')
 
 	return True
 
@@ -164,6 +167,15 @@ def add_public_rsa_key():
 
 def add_private_rsa_key():
 
-	print('\nAdd private RSA key.\n')
+	print('\nAdd private RSA key to login to remote server.\n')
 
 	return True
+
+
+
+def create_rsa_keys():
+
+	print('\nCreate RSA keys.\n')
+
+	return True
+
