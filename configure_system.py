@@ -1,3 +1,4 @@
+import getpass
 import os
 import sys
 
@@ -161,6 +162,10 @@ def add_public_rsa_key():
 
 	print('\nAdd public RSA key to allow remote logins.\n')
 
+	"""
+$ cat ~/.ssh/id_foo.pub | ssh user@foo 'cat >> ~/.ssh/authorized_keys'
+	"""
+
 	return True
 
 
@@ -176,6 +181,40 @@ def add_private_rsa_key():
 def create_rsa_keys():
 
 	print('\nCreate RSA keys.\n')
+
+	key_name = input('Key name' + environment.prompt)
+	key_directory = input('Where to place the keys (Default: Burton example files folder)' + environment.prompt)
+	key_password1 = getpass.getpass('Key password' + environment.prompt)
+	key_password2 = getpass.getpass('Verify Key password' + environment.prompt)
+
+	if key_password1 != key_password2:
+		print('Passwords do not match')
+		return False
+
+	if "'" in key_password1:
+		print('Quotes in passwords are not yet supported.')
+		return False
+
+	if key_directory=='':
+		key_directory = os.getcwd() + '/example-files/'
+
+	if not key_directory[-1] == '/':
+		key_directory+= '/'
+
+	if not os.path.isdir(key_directory):
+		print('The specified directory does not seem to exist: %s' % (key_directory, ))
+		return False
+
+	key_path = key_directory + key_name
+
+	if os.path.exists(key_path):
+		print('Key already exists: %s' % (key_path, ))
+		return False
+
+	external_command = " ssh-keygen -f %s -t rsa -P '%s' ; " % (key_path, key_password1, )
+	external_command+= " chmod 600 %s*" % (key_path, )
+
+	os.popen(external_command).read().strip()
 
 	return True
 
