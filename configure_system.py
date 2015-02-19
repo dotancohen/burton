@@ -221,5 +221,17 @@ def create_rsa_keys():
 
 	os.popen(external_command).read().strip()
 
+	if not os.path.exists(key_path):
+		print("Could not create key: %s" % (key_path, ))
+		return False
+
+	if not os.path.exists(key_path+'.pub') or :
+		print("Could not create public key: %s.pub" % (key_path, ))
+		return False
+
+	print("Keys created:")
+	print(key_path)
+	print(key_path + '.pub')
+
 	return True
 
