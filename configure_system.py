@@ -182,8 +182,8 @@ def create_rsa_keys():
 
 	print('\nCreate RSA keys.\n')
 
-	key_name = input('Key name' + environment.prompt)
-	key_directory = input('Where to place the keys (Default: Burton example files folder)' + environment.prompt)
+	key_name = input('Key name [gituser]' + environment.prompt)
+	key_directory = input('Where to place the keys [~/.ssh]' + environment.prompt)
 	key_password1 = getpass.getpass('Key password' + environment.prompt)
 	key_password2 = getpass.getpass('Verify Key password' + environment.prompt)
 
@@ -195,11 +195,16 @@ def create_rsa_keys():
 		print('Quotes in passwords are not yet supported.')
 		return False
 
+	if key_name=='':
+		key_name = 'rsa_gituser'
+
 	if key_directory=='':
-		key_directory = os.getcwd() + '/example-files/'
+		key_directory = os.path.expanduser('~') + '/.ssh'
 
 	if not key_directory[-1] == '/':
 		key_directory+= '/'
+
+	key_directory = os.path.expanduser(key_directory)
 
 	if not os.path.isdir(key_directory):
 		print('The specified directory does not seem to exist: %s' % (key_directory, ))
