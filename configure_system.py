@@ -22,9 +22,8 @@ def main(env):
 		print(" 2. Run Aptitude package manager")
 		print(" 3. Add Git public repository")
 		print(" 4. Connect directory to remote Git repository")
-		print(" 5. Add public RSA key to allow remote logins")
-		print(" 6. Add private RSA key to login to remote server")
-		print(" 7. Create RSA keys")
+		print(" 5. Upload public RSA key to login to remote server")
+		print(" 6. Create RSA keys")
 		#print(" 3. Drop to shell")
 		print(" 0. Go Back")
 		print(" -. Exit")
@@ -44,10 +43,8 @@ def main(env):
 		elif operation == '4':
 			add_dir_to_git()
 		elif operation == '5':
-			add_public_rsa_key()
+			upload_public_rsa_key()
 		elif operation == '6':
-			add_private_rsa_key()
-		elif operation == '7':
 			create_rsa_keys()
 		else:
 			print("Invalid input.")
@@ -158,21 +155,28 @@ def add_dir_to_git():
 
 
 
-def add_public_rsa_key():
+def upload_public_rsa_key():
 
-	print('\nAdd public RSA key to allow remote logins.\n')
+	print('\nUpload public RSA key to login to remote server.\n')
 
-	"""
-$ cat ~/.ssh/id_foo.pub | ssh user@foo 'cat >> ~/.ssh/authorized_keys'
-	"""
+	key_path = input('Path to public key' + environment.prompt)
+	server = input('server' + environment.prompt)
 
-	return True
+	if not os.path.exists(key_path):
+		print("Key not found: %s" % (key_path, ))
+		return False
 
+	external_command = " file %s " % (key_path)
+	key_type = os.popen(external_command).read().strip()
 
+	if not 'public key' in key_type:
+		print("Does not appear to be a public key! Not continuing!")
+		return False
 
-def add_private_rsa_key():
+	external_command = " cat %s | ssh %s 'cat >> ~/.ssh/authorized_keys'" % (key_name, server)
+	os.popen(external_command).read().strip()
 
-	print('\nAdd private RSA key to login to remote server.\n')
+	print("Please SSH into server to verify that the key was uploaded properly")
 
 	return True
 
@@ -225,7 +229,7 @@ def create_rsa_keys():
 		print("Could not create key: %s" % (key_path, ))
 		return False
 
-	if not os.path.exists(key_path+'.pub') or :
+	if not os.path.exists(key_path+'.pub'):
 		print("Could not create public key: %s.pub" % (key_path, ))
 		return False
 
