@@ -55,11 +55,11 @@ def quick_os_update():
 	print("\nAttempting to perform quick OS update...")
 
 	print("\nUpdating package list:")
-	result = os.system("aptitude update")
+	result = os.system("sudo aptitude update")
 	print(result)
 
 	print("\nInstalling updated packages:")
-	result = os.system("aptitude -y upgrade")
+	result = os.system("sudo aptitude -y upgrade")
 	print(result)
 
 	return True
@@ -68,7 +68,7 @@ def quick_os_update():
 
 def run_aptitude():
 	print("\nRunning Aptitude...")
-	os.system("aptitude")
+	os.system("sudo aptitude")
 	return True
 
 
@@ -86,10 +86,12 @@ def add_git_repo():
 	# TODO: Validate input
 
 	git_dir = base_git_dir + git_name + '.git'
+	current_user = str(os.getuid())
 
-	os.system("mkdir -p %s" % (git_dir, ))
+	os.system("sudo mkdir -p %s" % (git_dir, ))
+	os.system("sudo chown -R %s:%s %s" % (current_user, git_login_name, git_dir, ))
+	os.system("sudo chown -R 775 %s" % (git_dir, ))
 	os.system("cd %s ; git init --bare --shared" % (git_dir, ))
-	os.system("chgrp -R %s %s" % (git_login_name, git_dir, ))
 
 	git_dir_remote = 'ssh://%s%s' % (git_login_name, git_dir, )
 
@@ -149,7 +151,7 @@ def add_dir_to_git():
 
 	git_config.write(git_append)
 
-	print('Done! You may need to run the following command to push to the repo:\n    git push origin master')
+	print('Done! You may need to run the following command to push to the repo:\n    $ git push u origin master')
 
 	return True
 

@@ -98,9 +98,11 @@ if __name__ == '__main__':
 	env = Environment()
 
 	if not os.getuid()==0:
-		print("\nBurton may not run properly when not run as root.")
-		print("Please exit and restart as root user or with sudo.")
-		print("Using !! prompt to indicate non-root status.")
-		env.changePrompt("!! ")
+		pass
+		# TODO: Detect root and automatically remove 'sudo' from commands as needed.
+		#print("\nBurton may not run properly when not run as root.")
+		#print("Please exit and restart as root user or with sudo.")
+		#print("Using !! prompt to indicate non-root status.")
+		#env.changePrompt("!! ")
 
 	main(sys.argv)
