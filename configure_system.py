@@ -90,7 +90,7 @@ def add_git_repo():
 
 	os.system("sudo mkdir -p %s" % (git_dir, ))
 	os.system("sudo chown -R %s:%s %s" % (current_user, git_login_name, git_dir, ))
-	os.system("sudo chown -R 775 %s" % (git_dir, ))
+	os.system("sudo chmod -R 775 %s" % (git_dir, ))
 	os.system("cd %s ; git init --bare --shared" % (git_dir, ))
 
 	git_dir_remote = 'ssh://%s%s' % (git_login_name, git_dir, )
