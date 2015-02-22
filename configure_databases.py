@@ -1,7 +1,13 @@
+can_use = True
+
 import os
-import pymysql
 import sys
 
+try:
+	import pymysql
+except ImportError:
+	can_use = False
+	print("Cannot use database component! Please install the pymysql module!")
 
 
 environment = ''
@@ -9,8 +15,12 @@ environment = ''
 
 
 def main(env):
-	global environment
+	global environment, can_use
 	environment = env
+
+	if can_use == False:
+		print("Cannot use database component! Please install the pymysql module!")
+		return False
 
 	while True:
 		print("\nConfigure Databases\n")
@@ -35,6 +45,8 @@ def main(env):
 			backup_databases()
 		else:
 			print("Invalid input.")
+
+		return True
 
 
 
