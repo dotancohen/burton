@@ -62,7 +62,7 @@ def view_copyright_page():
 	print("\nCopyright page")
 	print("""
 Burton: CLI-based web server control panel
-Copyright (C) 2013 Dotan Cohen http://dotancohen.com
+Copyright (C) 2013-015 Dotan Cohen http://dotancohen.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
