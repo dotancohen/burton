@@ -130,6 +130,7 @@ def add_dir_to_git():
 	external_command+= " git init ; "
 	external_command+= " git config user.name 'Do not work on the server' ; "
 	external_command+= " git config user.email 'do_not_work@on.the.server' ; "
+	external_command+= " git config push.default simple ; "
 	external_command+= " git add . ; "
 	external_command+= " git commit -am 'Initial commit' 2>&1 "
 
@@ -151,7 +152,7 @@ def add_dir_to_git():
 
 	git_config.write(git_append)
 
-	print('Done! You may need to run the following command to push to the repo:\n    $ git push u origin master')
+	print('Done! You may need to run the following command to push to the repo:\n    $ git push -u origin master')
 
 	return True
 
