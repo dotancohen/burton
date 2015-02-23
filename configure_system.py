@@ -159,7 +159,15 @@ def add_dir_to_git():
 
 	git_config.write(git_append)
 
-	print('Done! You may need to run the following command to push to the repo:\n    $ git push -u origin master')
+	# TODO: Check that the steps completed properly.
+
+	print('Done! If this is a NEW public repo then you must do an initial branch-configuration push. Would you like to do that now?')
+	initial_push = input('[y/N]' + environment.prompt).lower()
+
+	if initial_push=='y' or initial_push=='yes'
+		external_command = " cd %s ; " % (dir_name, )
+		external_command+= " git push -u origin master "
+		os.system(external_command)
 
 	return True
 
