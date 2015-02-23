@@ -126,11 +126,18 @@ def add_dir_to_git():
 		print('The specified directory is already in a Git repository: %s' % (dir_name, ))
 		return False
 
+	git_version = os.popen("git --version | awk '{print $3}'").read().strip().split('.')
+
+	if git_version[0]=='1' and git_version[1]=='9':
+		push_default = " git config push.default simple ; "
+	else:
+		push_default = ''
+
 	external_command = "cd %s ; " % (dir_name, )
 	external_command+= " git init ; "
 	external_command+= " git config user.name 'Do not work on the server' ; "
 	external_command+= " git config user.email 'do_not_work@on.the.server' ; "
-	external_command+= " git config push.default simple ; "
+	external_command+= push_default
 	external_command+= " git add . ; "
 	external_command+= " git commit -am 'Initial commit' 2>&1 "
 
