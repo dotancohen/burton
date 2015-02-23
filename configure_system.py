@@ -115,6 +115,7 @@ def add_dir_to_git():
 
 	if not os.path.isdir(dir_name):
 		print('The specified directory does not seem to exist: %s' % (dir_name, ))
+		print('Aborting operation.')
 		return False
 
 	external_command = "cd %s ; " % (dir_name, )
@@ -124,6 +125,7 @@ def add_dir_to_git():
 
 	if not 'Not a git repository' in git_check:
 		print('The specified directory is already in a Git repository: %s' % (dir_name, ))
+		print('Aborting operation.')
 		return False
 
 	external_command = " find %s -name '.git' -type d " % (dir_name, )
@@ -138,7 +140,7 @@ def add_dir_to_git():
 		continue_install = input("Continue? [y/N]" + environment.prompt).lower()
 
 		if not initial_push=='y' and not initial_push=='yes':
-			print('Aborting.')
+			print('Aborting operation.')
 			return False
 
 	git_version = os.popen("git --version | awk '{print $3}'").read().strip().split('.')
