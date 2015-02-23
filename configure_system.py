@@ -126,6 +126,21 @@ def add_dir_to_git():
 		print('The specified directory is already in a Git repository: %s' % (dir_name, ))
 		return False
 
+	external_command = " find %s -name '.git' -type d " % (dir_name, )
+	subdirectory_git = os.popen(external_command).read().strip().split('\n')
+	subdirectory_git = [x for x in subdirectory_git if x!='']
+
+	if len(subdirectory_git)>0:
+		print("Git directories were found in the following subdirectories:")
+		for dirname in subdirectory_git:
+			print(" * %s" % (dirname, ))
+
+		continue_install = input("Continue? [y/N]" + environment.prompt).lower()
+
+		if not initial_push=='y' and not initial_push=='yes':
+			print('Aborting.')
+			return False
+
 	git_version = os.popen("git --version | awk '{print $3}'").read().strip().split('.')
 
 	if git_version[0]=='1' and git_version[1]=='9':
