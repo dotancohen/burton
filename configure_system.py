@@ -142,7 +142,7 @@ def add_dir_to_git():
 
 		continue_install = input("Continue? [y/N]" + environment.prompt).lower()
 
-		if not initial_push=='y' and not initial_push=='yes':
+		if not continue_install=='y' and not continue_install=='yes':
 			print('Aborting operation.')
 			return False
 
@@ -181,7 +181,7 @@ def add_dir_to_git():
 
 	# TODO: Check that the steps completed properly.
 
-	print('Done! If this is a NEW public repo then you must do an initial branch-configuration push. Would you like to do that now?')
+	print('Done! If connecting to A NEW PUBLIC REPO then you must do an initial branch-configuration push. Would you like to do that now?')
 	initial_push = input('[y/N]' + environment.prompt).lower()
 
 	if initial_push=='y' or initial_push=='yes':
