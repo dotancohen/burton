@@ -91,18 +91,10 @@ def add_git_repo():
 	user_gid = grp.getgrnam(git_login_name).gr_gid
 
 	os.system("sudo mkdir -p %s" % (git_dir, ))
-
-	for root, dirs, files in os.walk(git_dir):
-		for d in dirs:
-			filename = os.path.join(root, d)
-			os.chown(filename, user_uid, user_gid)
-			os.chmod(filename, 775)
-		for f in files:
-			filename = os.path.join(root, f)
-			os.chown(filename, user_uid, user_gid)
-			os.chmod(filename, 664)
-
-	os.system("cd %s ; git init --bare --shared" % (git_dir, ))
+	os.system("cd %s ; sudo git init --bare --shared" % (git_dir, ))
+	os.system("sudo chown -R %s:%s %s" % (user_uid, user_gid, git_dir, ))
+	os.system("chmod -R 775 %s" % (git_dir, ))
+	os.system("sudo chmod -R -s %s" % (git_dir, ))
 
 	git_dir_remote = 'ssh://%s%s' % (git_login_name, git_dir, )
 
