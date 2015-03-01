@@ -88,7 +88,14 @@ def add_git_repo():
 
 	git_dir = base_git_dir + git_name + '.git'
 	user_uid = os.getuid()
-	user_gid = grp.getgrnam(git_login_name).gr_gid
+
+	try:
+		user_gid = grp.getgrnam(git_login_name).gr_gid
+	except KeyError:
+		print("The group 'gituser' does not seem to exist. This function is intended to be run on the main Git server only.")
+		print("Aborting operation.")
+		return False
+
 
 	os.system("sudo mkdir -p %s" % (git_dir, ))
 	os.system("cd %s ; sudo git init --bare --shared" % (git_dir, ))
