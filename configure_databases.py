@@ -162,7 +162,7 @@ def manage_users():
 
 
 
-def create_new_user(username, db_name):
+def create_new_user():
 
 	print("\nCreate new database user")
 
@@ -175,7 +175,7 @@ def create_new_user(username, db_name):
 
 	mysql> FLUSH PRIVILEGES;
 	"""
-	return username
+	return True
 
 
 
