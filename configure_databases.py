@@ -100,6 +100,9 @@ def create_new_database():
 
 	db = os.popen('sudo mysql --defaults-extra-file=/etc/mysql/debian.cnf --skip-column-names -e "CREATE DATABASE '+db_name+'"').read().split('\n')
 
+	# Need to check if database was in fact successfully created.
+	print("\nDatabase created!\n")
+
 	return True
 
 
