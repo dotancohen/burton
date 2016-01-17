@@ -98,6 +98,7 @@ def create_new_database():
 
 	print("\nPlease enter a new database name:")
 	db_name = input(environment.prompt)
+	# TODO: Validate input!
 
 	db = os.popen('sudo mysql --defaults-extra-file=/etc/mysql/debian.cnf --skip-column-names -e "CREATE DATABASE '+db_name+'"').read().split('\n')
 
@@ -175,6 +176,35 @@ def create_new_user():
 
 	mysql> FLUSH PRIVILEGES;
 	"""
+
+
+	# TODO: Validate input!
+
+	print("\nPlease enter a new user name:")
+	user_name = input(environment.prompt)
+
+	print("\nPlease enter a password:")
+	password_1 = input(environment.prompt)
+
+	print("\nPlease validate password:")
+	password_2 = input(environment.prompt)
+
+	if password_1!=password_2:
+		print("\nPasswords did not match!\n")
+		return False
+
+	print("\nTo which database should the user be added:")
+	db_name = input(environment.prompt)
+	# TODO: Provide list of valid databases.
+
+	sql = "GRANT ALL PRIVILEGES ON %s.* TO '%s'@'localhost' IDENTIFIED BY '%s' WITH GRANT OPTION" % (db_name, user_name, password_1, )
+
+	db = os.popen('sudo mysql --defaults-extra-file=/etc/mysql/debian.cnf --skip-column-names -e "'+sql+'"').read().split('\n')
+	db = os.popen('sudo mysql --defaults-extra-file=/etc/mysql/debian.cnf --skip-column-names -e "FLUSH PRIVILEGES"').read().split('\n')
+
+	# Need to check if user was in fact successfully created.
+	print("\nUser created!\n")
+
 	return True
 
 
