@@ -122,6 +122,42 @@ def manage_users():
 	Due to a bug in MySQL, GRANT ALL does not permit GRANT FILE.
 	Due to a bug in MySQL, GRANT FILE only works with the db.table definition *.* (i.e. globally).
 	"""
+
+	default_users = ['root', 'debian-sys-maint', '']
+	available_users = []
+
+	users = os.popen('sudo mysql --defaults-extra-file=/etc/mysql/debian.cnf --skip-column-names -e "SELECT DISTINCT user FROM mysql.user"').read().split('\n')
+
+	for u in users:
+		if u not in default_users:
+			available_users.append(u)
+
+	print('\nAvailable users:')
+	index = 0
+	for index, value in enumerate(available_users):
+		if value not in default_users:
+			print(' %s. %s' % (str(index+1), value,))
+
+	new_user_index = index + 1
+	print(' %s. Create New User' % (str(new_user_index+1),))
+	print(' 0. Go Back')
+	print(' -. Exit')
+
+	while True:
+
+		operation = input(environment.prompt)
+
+		if operation == '0':
+			return True
+		elif operation == '-':
+			sys.exit()
+		elif int(operation)-1 == new_user_index:
+			create_new_user()
+		elif int(operation)-1 < new_user_index:
+			manage_user(available_users[int(operation)-1])
+		else:
+			print("Invalid input.")
+
 	return True
 
 
