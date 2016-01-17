@@ -33,7 +33,7 @@ import auxiliary_pages
 
 
 
-burton_version = '0.1.1'
+burton_version = '0.1.2'
 
 
 
