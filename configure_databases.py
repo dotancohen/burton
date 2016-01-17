@@ -25,8 +25,8 @@ def main(env):
 	while True:
 		print("\nConfigure Databases\n")
 		print("Please select an operation:")
-		print(" 1. Add/Remove database")
-		print(" 2. Add/Remove users")
+		print(" 1. Manage databases")
+		print(" 2. Manage users")
 		print(" 3. Backup databases")
 		print(" 0. Go Back")
 		print(" -. Exit")
