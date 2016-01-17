@@ -64,6 +64,7 @@ def manage_databases():
 			available_databases.append(db)
 
 	print('\nAvailable databases:')
+	index = 0
 	for index, value in enumerate(available_databases):
 		if value not in default_dbs:
 			print(' %s. %s' % (str(index+1), value,))
