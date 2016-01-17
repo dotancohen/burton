@@ -179,6 +179,12 @@ def create_new_user(username, db_name):
 
 
 
+def manage_user(user):
+	print("\nManage user " + user)
+	return True
+
+
+
 def get_users(username=None):
 
 	return True
