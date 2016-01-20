@@ -59,6 +59,7 @@ def main(argv):
 	while True:
 
 		print("\nPlease select an operation:")
+		print(" 0. Load server configuration profile")
 		print(" 1. Operating system statistics")
 		print(" 2. Configure and maintain operating system")
 		print(" 3. Configure websites")
@@ -73,6 +74,8 @@ def main(argv):
 
 		if operation == '-':
 			sys.exit()
+		elif operation == '0':
+			b.load_server_configuration(env)
 		elif operation == '1':
 			system_statistics.main(env)
 		elif operation == '2':
