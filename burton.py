@@ -31,13 +31,13 @@ import configure_databases
 import install_applications
 import auxiliary_pages
 
+from burton_class import Burton
+
 
 
 burton_version = '0.1.2'
-
-
-
-env = ''
+b = Burton()
+env = '' # Move to burton object
 
 
 
@@ -52,9 +52,8 @@ class Environment:
 
 
 def main(argv):
-	global burton_version, env
+	global burton_version, env, b
 
-	#env = Environment()
 	print("\nWelcome to Burton " + burton_version + "!")
 
 	while True:
