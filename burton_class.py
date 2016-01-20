@@ -10,6 +10,12 @@ class Burton(object):
 
 
 	def __init__(self):
+
+
+		self.settings_file = self.get_settings_file()
+
+		#config = configparser.ConfigParser()
+
 		self.environment = ''
 		self.foo = 'FOOBAR'
 
