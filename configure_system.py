@@ -16,18 +16,17 @@ def main(env):
 	global environment
 	environment = env
 
+	d = { char: func for char, _, func in MAIN_MENU }
 	while True:
 		print("\nConfigure and maintain operating system\n")
 		print("Please select an operation:")
 		for char, msg, _ in MAIN_MENU:
 			print(" %s. %s" % (char, msg))
 		operation = input(environment.prompt)
-		for char, _, func in MAIN_MENU:
-			if char == operation:
-				break
-		else:
+		if operation not in d:
 			print("Invalid input.")
-			continue     # continue 'while' loop
+			continue
+		func = d[operation]
 		if func is None:
 			return True
 		func()
