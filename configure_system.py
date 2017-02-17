@@ -7,6 +7,13 @@ import sys
 # PHP configuration
 
 
+PY3 = sys.version_info[0] == 3
+PY2 = sys.version_info[0] == 2
+
+if PY3:
+	raw_input = input
+
+
 
 environment = ''
 
@@ -22,7 +29,7 @@ def main(env):
 		print("Please select an operation:")
 		for char, msg, _ in MAIN_MENU:
 			print(" %s. %s" % (char, msg))
-		operation = input(environment.prompt)
+		operation = raw_input(environment.prompt)
 		if operation not in d:
 			print("Invalid input.")
 			continue
