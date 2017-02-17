@@ -28,8 +28,9 @@ def main(env):
 			continue
 		func = d[operation]
 		if func is None:
-			return True
+			break
 		func()
+	return True
 
 
 
