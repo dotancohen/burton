@@ -29,7 +29,7 @@ def main(env):
 		print("Please select an operation:")
 		for char, msg, _ in MAIN_MENU:
 			print(" %s. %s" % (char, msg))
-		operation = raw_input(environment.prompt)
+		operation = raw_input(environment.prompt).strip()
 		if operation not in d:
 			print("Invalid input.")
 			continue
