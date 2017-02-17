@@ -19,36 +19,18 @@ def main(env):
 	while True:
 		print("\nConfigure and maintain operating system\n")
 		print("Please select an operation:")
-		print(" 1. Quick hands-free OS update")
-		print(" 2. Run Aptitude package manager")
-		print(" 3. Add Git public repository")
-		print(" 4. Connect directory to remote Git repository")
-		print(" 5. Upload public RSA key to login to remote server")
-		print(" 6. Create RSA keys")
-		#print(" 3. Drop to shell")
-		print(" 0. Go Back")
-		print(" -. Exit")
-
+		for char, msg, _ in MAIN_MENU:
+			print(" %s. %s" % (char, msg))
 		operation = input(environment.prompt)
-
-		if operation == '0':
-			return True
-		elif operation == '-':
-			sys.exit()
-		elif operation == '1':
-			quick_os_update()
-		elif operation == '2':
-			run_aptitude()
-		elif operation == '3':
-			add_git_repo()
-		elif operation == '4':
-			add_dir_to_git()
-		elif operation == '5':
-			upload_public_rsa_key()
-		elif operation == '6':
-			create_rsa_keys()
+		for char, _, func in MAIN_MENU:
+			if char == operation:
+				break
 		else:
 			print("Invalid input.")
+			continue     # continue 'while' loop
+		if func is None:
+			return True
+		func()
 
 
 
@@ -284,3 +266,14 @@ def create_rsa_keys():
 
 	return True
 
+
+MAIN_MENU = [
+	('1', "Quick hands-free OS update"    , quick_os_update),
+	('2', "Run Aptitude package manager"  , run_aptitude),
+	('3', "Add Git public repository"     , add_git_repo),
+	('4', "Connect directory to remote Git repository", add_dir_to_git),
+	('5', "Upload public RSA key to login to remote server", upload_public_rsa_key),
+	('6', "Create RSA keys"               , create_rsa_keys),
+	('0', "Go Back"                       , None),
+	('-', "Exit"                          , sys.exit),
+]
