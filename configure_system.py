@@ -7,6 +7,13 @@ import sys
 # PHP configuration
 
 
+PY3 = sys.version_info[0] == 3
+PY2 = sys.version_info[0] == 2
+
+if PY3:
+	raw_input = input
+
+
 
 environment = ''
 
@@ -16,39 +23,21 @@ def main(env):
 	global environment
 	environment = env
 
+	d = { char: func for char, _, func in MAIN_MENU }
 	while True:
 		print("\nConfigure and maintain operating system\n")
 		print("Please select an operation:")
-		print(" 1. Quick hands-free OS update")
-		print(" 2. Run Aptitude package manager")
-		print(" 3. Add Git public repository")
-		print(" 4. Connect directory to remote Git repository")
-		print(" 5. Upload public RSA key to login to remote server")
-		print(" 6. Create RSA keys")
-		#print(" 3. Drop to shell")
-		print(" 0. Go Back")
-		print(" -. Exit")
-
-		operation = input(environment.prompt)
-
-		if operation == '0':
-			return True
-		elif operation == '-':
-			sys.exit()
-		elif operation == '1':
-			quick_os_update()
-		elif operation == '2':
-			run_aptitude()
-		elif operation == '3':
-			add_git_repo()
-		elif operation == '4':
-			add_dir_to_git()
-		elif operation == '5':
-			upload_public_rsa_key()
-		elif operation == '6':
-			create_rsa_keys()
-		else:
+		for char, msg, _ in MAIN_MENU:
+			print(" %s. %s" % (char, msg))
+		operation = raw_input(environment.prompt).strip()
+		if operation not in d:
 			print("Invalid input.")
+			continue
+		func = d[operation]
+		if func is None:
+			break
+		func()
+	return True
 
 
 
@@ -284,3 +273,14 @@ def create_rsa_keys():
 
 	return True
 
+
+MAIN_MENU = [
+	('1', "Quick hands-free OS update"    , quick_os_update),
+	('2', "Run Aptitude package manager"  , run_aptitude),
+	('3', "Add Git public repository"     , add_git_repo),
+	('4', "Connect directory to remote Git repository", add_dir_to_git),
+	('5', "Upload public RSA key to login to remote server", upload_public_rsa_key),
+	('6', "Create RSA keys"               , create_rsa_keys),
+	('0', "Go Back"                       , None),
+	('-', "Exit"                          , sys.exit),
+]
